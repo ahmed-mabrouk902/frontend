@@ -8,7 +8,7 @@ import { Instructor } from './instructor.model';
 
 })
 export class InstructorService {
-  private apiUrl = 'http://localhost:8089/api/instructor'; // Replace with your Spring Boot server URL
+  readonly apiUrl = 'http://localhost:8089/api/instructor'; // Replace with your Spring Boot server URL
 
   constructor(private http: HttpClient) { }
 

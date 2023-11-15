@@ -1,4 +1,4 @@
-FROM node:18.17.1-alpine
+FROM node:14 AS builder
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 COPY package*.json ./
@@ -7,4 +7,4 @@ RUN npm ci
 COPY . .
 RUN npm run build 
 EXPOSE 80
-CMD ["ng", "serve", "--host", "192.168.33.10", "--port", "80"]
+CMD ["nginx", "-g", "daemon off;"]
