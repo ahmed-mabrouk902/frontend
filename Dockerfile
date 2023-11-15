@@ -9,13 +9,17 @@ WORKDIR ongular/src/app
 # Copy the app package and package-lock.json file
 COPY package*.json ./
 
-# Install node packages
-RUN npm install
+# Install Angular CLI globally (you can also install it locally)
+RUN npm install -g @angular/cli
 
+# Install project dependencies
+RUN npm ci
 
+# Copy the rest of the application source code
+COPY . .
 
-# Build the app
-RUN npm run build
+# Build the Angular application
+RUN npm run build --prod
 
 # Expose $PORT on container.
 # We use a varibale here as the port is something that can differ on the environment.
