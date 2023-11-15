@@ -1,29 +1,32 @@
-# Use the official Node.js image as a base image
 FROM node:alpine3.11
 
-# Create a directory for your app
-RUN mkdir -p /ongular/src/app
+# Create an application directory
+RUN mkdir -p ongular/src/app
 
-# Set the working directory to the app directory
-WORKDIR /ongular/src/app
+# The /app directory should act as the main application directory
+WORKDIR ongular/src/app
 
-# Copy the package.json and package-lock.json files
-COPY package*.json ./
+# Copy the app package and package-lock.json file
+COPY ongular/package*.json ./
 
-# Install Angular CLI globally (you can also install it locally)
-RUN npm install -g @angular/cli
+# Install node packages
+RUN npm install
 
-# Install project dependencies
-RUN npm ci
+# Copy or project directory (locally) in the current directory of our docker image (/app)
+COPY ongular/ .
 
-# Copy the rest of the application source code
-COPY . .
+# Build the app
+RUN npm run build
 
-# Build the Angular application
-RUN npm run build --prod
-
-# Expose port 4200
+# Expose $PORT on container.
+# We use a varibale here as the port is something that can differ on the environment.
 EXPOSE 4200
 
-# Start the Angular development server
-CMD ["ng", "serve", "--host", "193.168.33.10", "--port", "4200"]
+# Set host to localhost / the docker image
+ENV NUXT_HOST=193.168.33.10
+
+# Set app port
+ENV NUXT_PORT=4200
+
+# Start the app
+CMD [ "ng", "serve","--host", "193.168.33.10", "--port", "4200" ]
