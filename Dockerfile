@@ -7,7 +7,7 @@ RUN mkdir -p ongular/src/app
 WORKDIR ongular/src/app
 
 # Copy the app package and package-lock.json file
-COPY ongular/package*.json ./
+COPY package*.json ./
 
 # Install node packages
 RUN npm install
