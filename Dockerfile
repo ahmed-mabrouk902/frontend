@@ -13,7 +13,7 @@ COPY ongular/package*.json ./
 RUN npm install
 
 # Copy or project directory (locally) in the current directory of our docker image (/app)
-COPY ongular/ .
+COPY frontend/ .
 
 # Build the app
 RUN npm run build
