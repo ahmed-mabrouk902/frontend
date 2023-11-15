@@ -6,5 +6,5 @@ RUN npm install -g @angular/cli
 RUN npm ci
 COPY . .
 RUN npm run build 
-EXPOSE 4200
-CMD ["ng", "serve", "--host", "192.168.33.10", "--port", "4200"]
+EXPOSE 80
+CMD ["ng", "serve", "--host", "192.168.33.10", "--port", "80"]
