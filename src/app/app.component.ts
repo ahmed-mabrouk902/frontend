@@ -20,13 +20,6 @@ export class AppComponent implements OnInit {
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       dateOfHire: [null, Validators.required],
-      courses: this.fb.group({
-        level: [null, Validators.required],
-        typeCourse: [null, Validators.required],
-        support: [null, Validators.required],
-        price: [null, Validators.required],
-        timeSlot: [null, Validators.required]
-      })
     });
   }
 
@@ -49,8 +42,14 @@ export class AppComponent implements OnInit {
           this.instructors.push(data);
           this.instructorForm.reset();
         },
-        error => console.error(error)
+        error => {
+          console.error(error);
+          // Handle specific error scenarios if needed
+          // For example, display an error message to the user
+        }
       );
+    } else {
+      // Handle the case where the form is not valid (e.g., show error messages)
     }
   }
 }

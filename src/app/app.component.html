@@ -7,42 +7,13 @@
   <div *ngIf="instructors.length > 0">
     <ul>
       <li *ngFor="let instructor of instructors">
-        {{ instructor.firstName }} {{ instructor.lastName }} - {{ instructor.dateOfHire }}
-        <ul>
-          <li *ngFor="let course of instructor.courses">
-            {{ course.courseName }}
-          </li>
-        </ul>
+        {{ instructor.firstName }} {{ instructor.lastName }} - {{ instructor.dateOfHire | date }}
+
+
       </li>
     </ul>
   </div>
 
   <!-- Add Comprehensive Instructor Form using Reactive Forms -->
-  <h3>Add New Instructor</h3>
-  <form (ngSubmit)="addInstructor()">
-    <!-- ... (existing form controls) ... -->
 
-    <div formGroupName="courses">
-      <label for="level">Course Level:</label>
-      <input type="number" id="level" formControlName="level" required>
-
-      <label for="typeCourse">Type of Course:</label>
-      <select id="typeCourse" formControlName="typeCourse" required>
-        <option *ngFor="let type of courseTypes" [value]="type">{{ type }}</option>
-      </select>
-
-      <label for="support">Support:</label>
-      <select id="support" formControlName="support" required>
-        <option *ngFor="let s of supports" [value]="s">{{ s }}</option>
-      </select>
-
-      <label for="price">Course Price:</label>
-      <input type="number" id="price" formControlName="price" required>
-
-      <label for="timeSlot">Time Slot:</label>
-      <input type="number" id="timeSlot" formControlName="timeSlot" required>
-    </div>
-
-    <button type="submit" [disabled]="!instructorForm.valid">Add Instructor</button>
-  </form>
 </div>

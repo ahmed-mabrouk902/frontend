@@ -8,15 +8,16 @@ import { Instructor } from './instructor.model';
 
 })
 export class InstructorService {
-  private baseUrl = 'http://localhost:8089/api'; // Replace with your Spring Boot server URL
+  private apiUrl = 'http://localhost:8089/api/instructor'; // Replace with your Spring Boot server URL
 
   constructor(private http: HttpClient) { }
 
   getAllInstructors(): Observable<Instructor[]> {
-    return this.http.get<Instructor[]>(`${this.baseUrl}/all`);
+    console.log('Fetching instructors...');
+    return this.http.get<Instructor[]>(this.apiUrl + '/all');
   }
 
   addInstructor(instructor: Instructor): Observable<Instructor> {
-    return this.http.post<Instructor>(`${this.baseUrl}/add`, instructor);
+    return this.http.post<Instructor>(this.apiUrl + '/add', instructor);
   }
 }
